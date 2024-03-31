@@ -1,0 +1,18 @@
+.input-container {
+  position: relative;
+}
+
+.input {
+  background: rgba(217, 217, 217, 0.16);
+  border: none;
+  border-bottom: 3px solid #d9d9d9;
+  color: #374957;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.875rem 1rem;
+  width: 100%;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
