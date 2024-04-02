@@ -2,30 +2,35 @@ import {
   FieldErrors,
   FieldValues,
   RegisterOptions,
+  UseFormClearErrors,
   UseFormRegister,
+  UseFormWatch,
 } from "react-hook-form";
 import "./Input.css";
-import { useEffect } from "react";
 
 interface InputProps {
+  clearErrors?: UseFormClearErrors<FieldValues>;
   label: string;
   errors?: FieldErrors<FieldValues>;
   register: UseFormRegister<FieldValues>;
   options?: RegisterOptions;
+  watch: UseFormWatch<FieldValues>;
 }
 
 export const Input = (props: InputProps) => {
-  useEffect(() => {
-    console.log("Input component mounted", props.errors);
-  }, [props.errors]);
+  const hasError = () => props.errors![props.label];
+  const isFilled = props.watch(props.label);
   return (
     <>
       <label>{props.label}</label>
       <input
-        className="input"
+        onFocus={() => props.clearErrors && props.clearErrors(props.label)}
+        className={`input ${isFilled ? "input--filled" : ""} ${
+          hasError() ? "input--error" : ""
+        }`}
         {...props.register(props.label, props.options)}
       />
-      {props.errors && props.errors[props.label] && <p>Invalid email</p>}
+      {hasError() && <p>Invalid email</p>}
     </>
   );
 };
