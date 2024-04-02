@@ -9,7 +9,7 @@ import {
 import "./Input.css";
 
 interface InputProps {
-  clearErrors?: UseFormClearErrors<FieldValues>;
+  clearErrors: UseFormClearErrors<FieldValues>;
   label: string;
   errors?: FieldErrors<FieldValues>;
   register: UseFormRegister<FieldValues>;
@@ -24,7 +24,7 @@ export const Input = (props: InputProps) => {
     <>
       <label>{props.label}</label>
       <input
-        onFocus={() => props.clearErrors && props.clearErrors(props.label)}
+        onFocus={() => props.clearErrors(props.label)}
         className={`input ${isFilled ? "input--filled" : ""} ${
           hasError() ? "input--error" : ""
         }`}

@@ -10,7 +10,6 @@ export default function App() {
     formState: { errors },
   } = useForm({ mode: "onBlur" });
   const onSubmit = handleSubmit((data) => console.log(data));
-  console.log("Reendering...");
   return (
     <form onSubmit={onSubmit}>
       <Input
@@ -19,9 +18,12 @@ export default function App() {
         errors={errors}
         clearErrors={clearErrors}
         options={{
-          required: true,
-          pattern:
-            /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
+          required: "este campo es requerido",
+          pattern: {
+            value:
+              /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
+            message: "El formato del email no es valido",
+          },
         }}
         watch={watch}
       />
